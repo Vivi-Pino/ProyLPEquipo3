@@ -1,3 +1,11 @@
 #include<iostream>
 #include<conio>
-#include<stdio.h>
+#include<stdio>
+#include<fstream>
+
+main()
+{
+
+
+getch();
+}
