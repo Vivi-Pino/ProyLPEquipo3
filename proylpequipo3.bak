@@ -2,36 +2,10 @@
 #include<conio>
 #include<stdio>
 #include<fstream>
-#include<stdlib>
-void MenudeDatos(int menu)
-{
- do
- {
-   cout<<"\t \t Ingrese la Opcion que desea Ejecutar";
-   cin>>menu;
- }while(m>=0 && m<4)
-}
-char horariohora1(int hora)
-{
- do
- {
-   char materia[15],semestre[15];
-   if (hora==7)
-   {
-    strcpy(materia,"Matematica I");
-    strcpy(semestre, "Primero");
-   }
-   else if(hora==9)
-   {
-    strcpy(materia,"Fisica III");
-    strcpy(semestre,"Tercero");
-   }
- }while(hora>=7 && hora<20);
-}
 
 main()
 {
-   int m, horario;
+   int m;
    do
    {
 
@@ -40,12 +14,17 @@ main()
    printf("2- Ver el horario de hoy: \n");
    printf("3- Ver el horario de la Semana: \n");
    printf("4- Salir. \n");
-   horario=MenudeDatos(m);
+   	do
+      {
+   printf("\nINGRESE LA OPCION A EJECUTAR: ");
+   scanf("%d",&m);
+   }while(m<=0 || m>4);
+
 
    switch(m)
    {
     	case 1:
-      	char mat[10], sem[10],  dia[10];
+      	char mat[10], sem[10], ini[10], fin[10], dia[10];
 
       	printf("\nIngrese los siguientes datos: \n\n");
       	printf("NOMBRE DE LA MATERIA: \n");
