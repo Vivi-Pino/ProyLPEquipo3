@@ -19,7 +19,7 @@ main()
    }
    else
    {
-   printf("El dato Ingresado es incorrecto");
+   printf("El dato ingresado es incorrecto");
    }
 
 getch();
