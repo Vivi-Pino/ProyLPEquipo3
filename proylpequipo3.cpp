@@ -3,13 +3,16 @@
 #include<stdio>
 #include<fstream>
 #include<stdlib>
-void MenudeDatos(int menu)
+
+int MenudeDatos(int menu)
 {
+int m;
  do
  {
-   cout<<"\t \t Ingrese la Opcion que desea Ejecutar";
+   cout<<"\tIngrese la Opcion que desea Ejecutar ";
    cin>>menu;
- }while(m>=0 && m<4)
+ }while(m<0 && m>=4);
+ return menu;
 }
 char horariohora1(int hora)
 {
@@ -26,12 +29,12 @@ char horariohora1(int hora)
     strcpy(materia,"Fisica III");
     strcpy(semestre,"Tercero");
    }
- }while(hora>=7 && hora<20);
+ }while(hora<7 && hora>=20);
 }
 
 main()
 {
-   int m, horario;
+   int m, horario, opc;
    do
    {
 
@@ -40,12 +43,12 @@ main()
    printf("2- Ver el horario de hoy: \n");
    printf("3- Ver el horario de la Semana: \n");
    printf("4- Salir. \n");
-   horario=MenudeDatos(m);
+   opc = MenudeDatos(m);
 
-   switch(m)
+   switch(opc)
    {
     	case 1:
-      	char mat[10], sem[10],  dia[10];
+      	char mat[10], sem[10],  dia[10], ini[10], fin[10];
 
       	printf("\nIngrese los siguientes datos: \n\n");
       	printf("NOMBRE DE LA MATERIA: \n");
