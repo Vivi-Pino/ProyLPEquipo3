@@ -11,30 +11,23 @@ int m;
  {
    cout<<"\tIngrese la Opcion que desea Ejecutar ";
    cin>>menu;
+   if(menu>4)
+   {
+    cout<<"\tOPCION INGRESADA INCORRECTA\n";
+   }
  }while(m<0 && m>=4);
  return menu;
 }
-char horariohora1(int hora)
-{
- do
- {
-   char materia[15],semestre[15];
-   if (hora==7)
-   {
-    strcpy(materia,"Matematica I");
-    strcpy(semestre, "Primero");
-   }
-   else if(hora==9)
-   {
-    strcpy(materia,"Fisica III");
-    strcpy(semestre,"Tercero");
-   }
- }while(hora<7 && hora>=20);
-}
+
 
 main()
 {
+   ofstream archivo("C:/BC5/Archivos/horario.txt");
+	archivo<<"\n";
+	archivo.close();
+
    int m, horario, opc;
+
    do
    {
 
@@ -47,13 +40,12 @@ main()
 
    switch(opc)
    {
-<<<<<<< HEAD
-   printf("El dato Ingresado es incorrecto");
-=======
-    	case 1:
-      	char mat[10], sem[10],  dia[10], ini[10], fin[10];
 
-      	printf("\nIngrese los siguientes datos: \n\n");
+   printf("El dato Ingresado es incorrecto");
+   char mat[10], sem[10],  dia[10], ini[10], fin[10], caracter;
+    	case 1:
+
+      	printf("\nIngrese los siguientes Datos: \n\n");
       	printf("NOMBRE DE LA MATERIA: \n");
       	scanf("%s",&mat);
       	printf("NOMBRE DEL SEMESTRE: \n");
@@ -64,22 +56,38 @@ main()
       	scanf("%s",&ini);
       	printf("HORA DE FIN: \n");
       	scanf("%s",&fin);
+         printf("Presione una tecla para regresar al menu principal\n");
+         getch();
 
       break;
 
       case 2:
       	printf("\n\t HORARIO DE HOY \n");
+
+
       break;
 
       case 3:
       	printf("\n\t HORARIO DE LA SEMANA \n");
+
+      	ifstream archivo("C:/BC5/Archivos/horario.txt", ios::in);
+			while(!archivo.eof())
+			{
+			archivo.get(caracter);
+			cout<<caracter;
+			}
+			archivo.close();
+
+         printf("Presione una tecla para regresar al menu principal\n");
+         getch();
       break;
 
       case 4:
       	return 0;
       break;
->>>>>>> origin/master
+
    }
+
    }while(m=4);
 
 getch();
