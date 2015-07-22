@@ -3,6 +3,7 @@
 #include<stdio>
 #include<fstream>
 #include<stdlib>
+#include<time>
 
 int MenudeDatos(int menu)
 {
@@ -26,10 +27,22 @@ main()
 	archivo<<"\n";
 	archivo.close();
 
+  	time_t t;
+  	struct tm *tm;
+  	char fecha[100], hora[100], horah[100];
+
+
    int m, horario, opc;
 
    do
    {
+   t=time(NULL);
+   tm=localtime(&t);
+   strftime(fecha, 100,"FECHA: %d/%m/%Y", tm);
+   strftime(hora,100,"HORA: %H:%M:%S", tm);
+   strftime(horah,100,"%Hh%M", tm);
+   printf ("%s\n", fecha);
+   printf ("%s\n",hora);
 
    printf("\n\tMENU PRINCIPAL\n");
    printf("1- Ingresar una nueva hora de clases: \n");
@@ -54,31 +67,22 @@ main()
       	scanf("%s",&dia);
       	printf("HORA DE INICIO: \n");
       	scanf("%s",&ini);
-      	printf("HORA DE FIN: \n");
-      	scanf("%s",&fin);
-         printf("Presione una tecla para regresar al menu principal\n");
+         printf("Presione una tecla para regresar al menu principal\n\n");
          getch();
-
       break;
 
       case 2:
       	printf("\n\t HORARIO DE HOY \n");
-
+         printf("Presione una tecla para regresar al menu principal\n\n");
+         getch();
 
       break;
 
       case 3:
       	printf("\n\t HORARIO DE LA SEMANA \n");
 
-      	ifstream archivo("C:/BC5/Archivos/horario.txt", ios::in);
-			while(!archivo.eof())
-			{
-			archivo.get(caracter);
-			cout<<caracter;
-			}
-			archivo.close();
 
-         printf("Presione una tecla para regresar al menu principal\n");
+         printf("Presione una tecla para regresar al menu principal\n\n");
          getch();
       break;
 
