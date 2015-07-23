@@ -51,14 +51,15 @@ main()
    printf("4- Salir. \n");
    opc = MenudeDatos(m);
 
+
+   char mat[10], sem[10],  dia[10], ini[10], fin[10],caracter;
+   ofstream archivo1("C:/BC5/Archivos/horario.txt",ios::app);
+   ifstream archivo("C:/BC5/Archivos/horario.txt", ios::in);
+
    switch(opc)
    {
-
-   printf("El dato Ingresado es incorrecto");
-   char mat[10], sem[10],  dia[10], ini[10], fin[10], caracter;
     	case 1:
-
-      	printf("\nIngrese los siguientes Datos: \n\n");
+        	printf("\nIngrese los siguientes Datos: \n\n");
       	printf("NOMBRE DE LA MATERIA: \n");
       	scanf("%s",&mat);
 
@@ -90,12 +91,35 @@ main()
           scanf("%s",&fin);
          }
          printf("Presione una tecla para regresar al menu principal\n\n");
+
+         archivo1<<"MATERIA: "<<mat<<"\n";
+         archivo1<<"SEMESTRE: "<<sem<<"\n";
+         if (strcmp(dia,"LUN")==0)
+         {
+         archivo1<<"DIA: Lunes\n";}
+         if (strcmp(dia,"MAR")==0)
+         {
+         archivo1<<"DIA: Martes\n";}
+         if (strcmp(dia,"MIE")==0)
+         {
+         archivo1<<"DIA: Miercoles\n";}
+         if (strcmp(dia,"JUE")==0)
+         {
+         archivo1<<"DIA: Jueves\n";}
+         if (strcmp(dia,"VIE")==0)
+         {
+         archivo1<<"DIA: Viernes\n";}
+
+         archivo1<<"HORA DE INICIO: "<<ini<<"\n";
+         archivo1<<"HORA FIN: "<<fin<<"\n\n";
+         archivo1.close();
          getch();
       break;
 
       case 2:
       	printf("\n\t HORARIO DE HOY \n");
          printf("Presione una tecla para regresar al menu principal\n\n");
+
          getch();
 
       break;
@@ -104,12 +128,18 @@ main()
       	printf("\n\t HORARIO DE LA SEMANA \n");
 
 
+         while(!archivo.eof())
+			{
+			archivo.get(caracter);
+			cout<<caracter;
+			}
+			archivo.close();
          printf("Presione una tecla para regresar al menu principal\n\n");
          getch();
       break;
 
       case 4:
-      	return 0;
+         return 0;
       break;
 
    }
