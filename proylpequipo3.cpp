@@ -7,23 +7,47 @@
 
 int MenudeDatos(int menu)
 {
-int m;
  do
  {
-   cout<<"\tIngrese la Opcion que desea Ejecutar ";
-   cin>>menu;
-   if(menu>4)
+   printf("\n\tMENU PRINCIPAL\n");
+   printf("1- Ingresar una nueva hora de clases: \n");
+   printf("2- Ver el horario de hoy: \n");
+   printf("3- Ver el horario de la Semana: \n");
+   printf("4- Salir. \n");
+   printf("\tIngrese la Opcion que desea Ejecutar ");
+   scanf("%d",&menu);
+   if(menu>4 || menu<1)
    {
     cout<<"\tOPCION INGRESADA INCORRECTA\n";
    }
- }while(m<0 && m>=4);
- return menu;
+  }while(menu<0 && menu>=4);
+  return menu;
 }
 
-
-main()
+void Fecha(char fechah[])
 {
-   ofstream archivolun("C:/BC5/Archivos/horariolun.txt");
+ time_t t;
+  	struct tm *tm;
+  	char fecha[100], hora[100], horah[100];
+   t=time(NULL);
+   tm=localtime(&t);
+   strftime(fechah, 100,"%A", tm);
+   strftime(fecha, 100,"FECHA: %d/%m/%Y", tm);
+   strftime(hora,100,"HORA: %H:%M:%S", tm);
+   strftime(horah,100,"%Hh%M", tm);
+   printf ("%s\n", fecha);
+   printf ("%s\n",hora);
+}
+
+void presionar()
+{
+printf("Presione una tecla para regresar al menu principal\n\n");
+getch();
+}
+
+void Creacion()
+{
+ofstream archivolun("C:/BC5/Archivos/horariolun.txt");
 	archivolun<<"\n";
 	archivolun.close();
    ofstream archivomar("C:/BC5/Archivos/horariomar.txt");
@@ -38,56 +62,29 @@ main()
    ofstream archivovie("C:/BC5/Archivos/horariovie.txt");
 	archivovie<<"\n";
 	archivovie.close();
+}
 
-
-  	time_t t;
-  	struct tm *tm;
-  	char fecha[100], hora[100], horah[100],fechah[100];
-
-
-   int m, horario, opc;
-
-   do
-   {
-   t=time(NULL);
-   tm=localtime(&t);
-   strftime(fechah, 100,"%A", tm);
-   strftime(fecha, 100,"FECHA: %d/%m/%Y", tm);
-   strftime(hora,100,"HORA: %H:%M:%S", tm);
-   strftime(horah,100,"%Hh%M", tm);
-   printf ("%s\n", fecha);
-   printf ("%s\n",hora);
-
-   printf("\n\tMENU PRINCIPAL\n");
-   printf("1- Ingresar una nueva hora de clases: \n");
-   printf("2- Ver el horario de hoy: \n");
-   printf("3- Ver el horario de la Semana: \n");
-   printf("4- Salir. \n");
-   opc = MenudeDatos(m);
-
-
+void Horario()
+{
    char mat[10], sem[10],  dia[10], ini[10], fin[10],caracter;
    ofstream archivo1("C:/BC5/Archivos/horariolun.txt",ios::app);
    ofstream archivo2("C:/BC5/Archivos/horariomar.txt",ios::app);
    ofstream archivo3("C:/BC5/Archivos/horariomie.txt",ios::app);
    ofstream archivo4("C:/BC5/Archivos/horariojue.txt",ios::app);
    ofstream archivo5("C:/BC5/Archivos/horariovie.txt",ios::app);
-   ifstream archivolun("C:/BC5/Archivos/horariolun.txt", ios::in);
-   ifstream archivomar("C:/BC5/Archivos/horariomar.txt", ios::in);
-   ifstream archivomie("C:/BC5/Archivos/horariomie.txt", ios::in);
-   ifstream archivojue("C:/BC5/Archivos/horariojue.txt", ios::in);
-   ifstream archivovie("C:/BC5/Archivos/horariovie.txt", ios::in);
+   printf("\nIngrese los siguientes Datos: \n\n");
 
-
-   switch(opc)
-   {
-    	case 1:
-        	printf("\nIngrese los siguientes Datos: \n\n");
       	printf("NOMBRE DE LA MATERIA: \n");
       	scanf("%s",&mat);
 
       	printf("NOMBRE DEL SEMESTRE: \n");
       	scanf("%s",&sem);
+
+         while(strcmp(sem,"PRIMERO")!=0 && strcmp(sem,"SEGUNDO")!=0 && strcmp(sem,"TERCERO")!=0 && strcmp(sem,"CUARTO")!=0 && strcmp(sem,"QUINTO")!=0 && strcmp(sem,"SEXTO")!=0 && strcmp(sem,"SEPTIMO")!=0 && strcmp(sem,"OCTAVO")!=0 && strcmp(sem,"NOVENO")!=0 && strcmp(sem,"DECIMO")!=0)
+         {
+          printf("Ingresos permitidos: PRIMERO, SEGUNDO, TERCERO, CUARTO, QUINTO, SEXTO, SEPTIMO, OCTAVO, NOVENO, DECIMO\nNOMBRE DEL SEMESTRE: \n");
+          scanf("%s",&sem);
+         }
 
       	printf("DIA DE LA SEMANA: \n");
          scanf("%s",&dia);
@@ -113,8 +110,6 @@ main()
           printf("Formato permitido: EJ. 07h00 \nHORA DE FIN: \n");
           scanf("%s",&fin);
          }
-         printf("Presione una tecla para regresar al menu principal\n\n");
-
 
          if (strcmp(dia,"LUN")==0)
          {
@@ -158,14 +153,13 @@ main()
          archivo3.close();
          archivo4.close();
          archivo5.close();
+}
 
-         getch();
-      break;
-
-      case 2:
-
-
-         if(strcmp(fechah,"Monday")==0)
+void HLun(char fechah[])
+{
+char caracter;
+ifstream archivolun("C:/BC5/Archivos/horariolun.txt", ios::in);
+if(strcmp(fechah,"Monday")==0)
          {
          printf("\n\t HORARIO DE HOY \n");
          while(!archivolun.eof())
@@ -174,60 +168,157 @@ main()
 			cout<<caracter;
 			}
          }
-			archivolun.close();         if(strcmp(fechah,"Tuesday")==0)         {         printf("\n\t HORARIO DE HOY \n");         while(!archivomar.eof())			{
+			archivolun.close();
+}
+
+void HMar(char fechah[])
+{
+char caracter;
+ifstream archivomar("C:/BC5/Archivos/horariomar.txt", ios::in);
+if(strcmp(fechah,"Tuesday")==0)
+         {         printf("\n\t HORARIO DE HOY \n");         while(!archivomar.eof())			{
 			archivomar.get(caracter);
 			cout<<caracter;
 			}
          }
-			archivomar.close();         if(strcmp(fechah,"Wednesday")==0)         {         printf("\n\t HORARIO DE HOY \n");         while(!archivomie.eof())			{
+			archivomar.close();
+}
+
+void HMie(char fechah[])
+{
+char caracter;
+ifstream archivomie("C:/BC5/Archivos/horariomie.txt", ios::in);
+if(strcmp(fechah,"Wednesday")==0)
+         {         printf("\n\t HORARIO DE HOY \n");         while(!archivomie.eof())			{
 			archivomie.get(caracter);
 			cout<<caracter;
 			}
          }
-			archivomie.close();         if(strcmp(fechah,"Thursday")==0)         {         printf("\n\t HORARIO DE HOY \n");         while(!archivojue.eof())			{
+			archivomie.close();
+}
+
+void HJue(char fechah[])
+{
+char caracter;
+ifstream archivojue("C:/BC5/Archivos/horariojue.txt", ios::in);
+if(strcmp(fechah,"Thursday")==0)
+         {         printf("\n\t HORARIO DE HOY \n");         while(!archivojue.eof())			{
 			archivojue.get(caracter);
 			cout<<caracter;
 			}
          }
-			archivojue.close();         if(strcmp(fechah,"Friday")==0)         {         printf("\n\t HORARIO DE HOY \n");         while(!archivovie.eof())			{
+			archivojue.close();
+}
+
+void HVie(char fechah[])
+{
+char caracter;
+ifstream archivovie("C:/BC5/Archivos/horariovie.txt", ios::in);
+if(strcmp(fechah,"Friday")==0)
+         {         printf("\n\t HORARIO DE HOY \n");         while(!archivovie.eof())			{
 			archivovie.get(caracter);
 			cout<<caracter;
 			}
          }
 			archivovie.close();
+}
 
-         printf("Presione una tecla para regresar al menu principal\n\n");
-         getch();
 
+void H1()
+{
+char caracter;
+   ifstream archivolun("C:/BC5/Archivos/horariolun.txt", ios::in);
+   while(!archivolun.eof())
+   {
+   archivolun.get(caracter);
+   cout<<caracter;
+   }
+   archivolun.close();
+}
+
+void H2()
+{
+char caracter;
+   ifstream archivomar("C:/BC5/Archivos/horariomar.txt", ios::in);
+	while(!archivomar.eof())
+	{
+   archivomar.get(caracter);
+   cout<<caracter;
+   }
+   archivomar.close();
+}
+
+void H3()
+{
+char caracter;
+   ifstream archivomie("C:/BC5/Archivos/horariomie.txt", ios::in);
+   while(!archivomie.eof())
+   {
+   archivomie.get(caracter);
+	cout<<caracter;
+   }
+   archivomie.close();
+}
+
+void H4()
+{
+char caracter;
+   ifstream archivojue("C:/BC5/Archivos/horariojue.txt", ios::in);
+   while(!archivojue.eof())
+   {
+   archivojue.get(caracter);
+   cout<<caracter;
+   }
+   archivojue.close();
+}
+
+void H5()
+{
+char caracter;
+   ifstream archivovie("C:/BC5/Archivos/horariovie.txt", ios::in);
+   while(!archivovie.eof())   {
+   archivovie.get(caracter);
+   cout<<caracter;
+   }
+   archivovie.close();}
+
+main()
+{
+   char fechah[100];
+   int m,opc;
+   Creacion();
+
+   do
+   {
+   Fecha(fechah);
+   opc = MenudeDatos(m);
+
+
+
+   switch(opc)
+   {
+    	case 1:
+         Horario();
+         presionar();
+      break;
+
+      case 2:
+         HLun(fechah);
+         HMar(fechah);
+         HMie(fechah);
+         HJue(fechah);
+         HVie(fechah);
+         presionar();
       break;
 
       case 3:
       	printf("\n\t HORARIO DE LA SEMANA \n");
-
-         while(!archivolun.eof())
-			{
-			archivolun.get(caracter);
-			cout<<caracter;
-			}
-			archivolun.close();         while(!archivomar.eof())			{
-			archivomar.get(caracter);
-			cout<<caracter;
-			}
-			archivomar.close();         while(!archivomie.eof())			{
-			archivomie.get(caracter);
-			cout<<caracter;
-			}
-			archivomie.close();         while(!archivojue.eof())			{
-			archivojue.get(caracter);
-			cout<<caracter;
-			}
-			archivojue.close();         while(!archivovie.eof())			{
-			archivovie.get(caracter);
-			cout<<caracter;
-			}
-			archivovie.close();
-         printf("Presione una tecla para regresar al menu principal\n\n");
-         getch();
+   		H1();
+         H2();
+         H3();
+         H4();
+         H5();
+         presionar();
       break;
 
       case 4:
